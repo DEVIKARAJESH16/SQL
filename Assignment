@@ -1,0 +1,72 @@
+Q1. List 10 bike stations that are active from the austin_bikeshare dataset.
+
+Command:
+SELECT * FROM `bigquery-public-data.austin_bikeshare.bikeshare_stations` 
+where status = "active"
+limit 10
+
+Result:
+station_id	name	status	latitude	longitude	location
+3793	Rio Grande & 28th	active	30.29333	-97.74412	"(30.29333, -97.74412)"
+3291	11th & San Jacinto	active	30.27193	-97.73854	"(30.27193, -97.73854)"
+4058	Hollow Creek & Barton Hills	active	30.26139	-97.77234	"(30.26139, -97.77234)"
+3797	21st & University	active	30.28354	-97.73953	"(30.28354, -97.73953)"
+3838	Nueces & 26th	active	30.29068	-97.74292	"(30.29068, -97.74292)"
+2544	East 6th & Pedernales St.	active	30.25895	-97.71475	"(30.25895, -97.71475)"
+3390	Brazos & 6th	active	30.26754	-97.74154	"(30.26754, -97.74154)"
+2823	Capital Metro HQ - East 5th at Broadway	active	30.2563	-97.71007	"(30.2563, -97.71007)"
+2711	Barton Springs @ Kinney Ave	active	30.262	-97.76118	"(30.262, -97.76118)"
+3685	Henderson & 9th	active	30.27217	-97.75246	"(30.27217, -97.75246)"
+
+
+Q2. Arrange station names in ascending order from austin_bikeshare dataset.
+Command:
+SELECT name
+FROM `bigquery-public-data.austin_bikeshare.bikeshare_stations` 
+order by name
+limit 10
+
+Result:
+name
+10th & Red River
+11th & Salina
+11th & San Jacinto
+13th & San Antonio
+17th & Guadalupe
+21st & Speedway @PCL
+21st & University
+22nd & Pearl
+23rd & Rio Grande
+23rd & San Jacinto @ DKR Stadium
+
+
+Q3. List the cyclists with annual membership whose trip duration was more than 20 minutes.
+Command:
+SELECT * FROM `bigquery-public-data.austin_bikeshare.bikeshare_trips` 
+where subscriber_type = "Annual Membership (Austin B-cycle)" and 
+duration_minutes >=20
+limit 10
+
+Result:
+trip_id	subscriber_type	bikeid	start_time	start_station_id	start_station_name	end_station_id	end_station_name	duration_minutes
+9900288210	Annual Membership (Austin B-cycle)	223	2014-10-31 13:12:00 UTC	2823	Capital Metro HQ - East 5th at Broadway	2823	Capital Metro HQ - East 5th at Broadway	23
+9900288446	Annual Membership (Austin B-cycle)	544	2014-10-31 17:12:00 UTC	2541	State Capitol @ 14th & Colorado	2823	Capital Metro HQ - East 5th at Broadway	20
+9900313847	Annual Membership (Austin B-cycle)	774	2014-11-07 11:12:00 UTC	2823	Capital Metro HQ - East 5th at Broadway	2823	Capital Metro HQ - East 5th at Broadway	38
+9900316399	Annual Membership (Austin B-cycle)	911	2014-11-10 11:12:00 UTC	2823	Capital Metro HQ - East 5th at Broadway	2823	Capital Metro HQ - East 5th at Broadway	31
+9900318365	Annual Membership (Austin B-cycle)	326	2014-11-19 17:12:00 UTC	2823	Capital Metro HQ - East 5th at Broadway	2712	Toomey Rd @ South Lamar	21
+9900318954	Annual Membership (Austin B-cycle)	37	2014-11-22 10:12:00 UTC	2712	Toomey Rd @ South Lamar	2712	Toomey Rd @ South Lamar	27
+9900319303	Annual Membership (Austin B-cycle)	226	2014-11-23 15:12:00 UTC	2536	Waller & 6th St.	2536	Waller & 6th St.	105
+9900001238	Annual Membership (Austin B-cycle)	16	2014-01-12 11:12:00 UTC	2500	Republic Square	2500	Republic Square	21
+9900026686	Annual Membership (Austin B-cycle)	548	2014-02-23 14:12:00 UTC	2536	Waller & 6th St.	2536	Waller & 6th St.	29
+9900046312	Annual Membership (Austin B-cycle)	416	2014-03-12 15:12:00 UTC	1003	8th & Guadalupe	1003	8th & Guadalupe	20
+
+
+Q4. How many trips started from Zilker Park West and whose trip duration was more than an hour?
+Command
+SELECT Count (trip_id) 
+FROM `bigquery-public-data.austin_bikeshare.bikeshare_trips` 
+where start_station_name = "Zilker Park West" and duration_minutes >60
+
+Result
+Row	f0_	
+1	  55
